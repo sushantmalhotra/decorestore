@@ -9,7 +9,7 @@
   <script>
     history.scrollRestoration = 'manual';
     if (window.location.hash) history.replaceState(null, '', window.location.pathname);
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   </script>
 </head>
 <body>
@@ -31,18 +31,45 @@
         <span class="cart-count">0</span>
       </button>
     </div>
+
+    <div class="mobile-nav-controls">
+      <button class="cart-btn" id="mobileCartBtn" aria-label="Shopping cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span class="cart-count">0</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </nav>
+
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <a href="#collection">Collection</a>
+    <a href="#about">About</a>
+    <a href="#shop">Shop</a>
+    <a href="#contact">Contact</a>
+  </div>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="brand">
       <div class="brand-name">Relique</div>
       <div class="brand-tagline">Collected Through Time</div>
+      <a href="#shop" class="hero-cta">Shop The Collection</a>
     </div>
 
-    <img class="item" id="clock" src="mainPageImages/clock.png" alt="Clock" style="width:400px;height:500px;">
-    <img class="item" id="vase"  src="mainPageImages/vase.png"  alt="Vase"  style="width:650px;height:500px;">
-    <img class="item" id="lamp"  src="mainPageImages/lamp.png"  alt="Lamp"  style="width:500px;height:500px;">
+    <img class="item item--clock" id="clock" src="mainPageImages/clock.png" alt="Clock">
+    <img class="item item--vase"  id="vase"  src="mainPageImages/vase.png"  alt="Vase">
+    <img class="item item--lamp"  id="lamp"  src="mainPageImages/lamp.png"  alt="Lamp">
   </section>
 
   <!-- Collection Section -->
@@ -59,7 +86,8 @@
         </div>
         <div class="category-info">
           <h3>Lightings</h3>
-          <p>There is something about old light — the way it pools amber across a room, unhurried. Our lighting pieces carry the warmth of workshops long gone: wrought iron floor lamps, hand-blown glass pendants, and brass sconces that once dressed the walls of estates. Each one throws shadows worth keeping.</p>
+          <p class="category-desc-full">There is something about old light - the way it pools amber across a room, unhurried. Our lighting pieces carry the warmth of workshops long gone: wrought iron floor lamps, hand-blown glass pendants, and brass sconces that once dressed the walls of estates. Each one throws shadows worth keeping.</p>
+          <p class="category-desc-short">Wrought iron lamps, hand-blown pendants, and brass sconces carrying the warmth of workshops long gone.</p>
         </div>
       </div>
 
@@ -69,7 +97,8 @@
         </div>
         <div class="category-info">
           <h3>Accessories</h3>
-          <p>The smallest objects hold the longest stories. A ceramic dish that circled a morning table for forty years. A bronze letter opener still sharp with purpose. Our accessories are the quiet details that shift a space from decorated to inhabited — collected slowly, placed with intention.</p>
+          <p class="category-desc-full">The smallest objects hold the longest stories. A ceramic dish that circled a morning table for forty years. A bronze letter opener still sharp with purpose. Our accessories are the quiet details that shift a space from decorated to inhabited — collected slowly, placed with intention.</p>
+          <p class="category-desc-short">Ceramic dishes, bronze openers, and quiet details that turn a space from decorated to inhabited.</p>
         </div>
       </div>
 
@@ -79,7 +108,8 @@
         </div>
         <div class="category-info">
           <h3>Wall Decor</h3>
-          <p>A bare wall is a silence waiting to be filled. We source mirrors that have reflected decades of faces, framed prints pulled from print rooms and private libraries, and hand-carved panels that carry the grain of their original forest. Your walls deserve something that has already earned its place.</p>
+          <p class="category-desc-full">A bare wall is a silence waiting to be filled. We source mirrors that have reflected decades of faces, framed prints pulled from print rooms and private libraries, and hand-carved panels that carry the grain of their original forest. Your walls deserve something that has already earned its place.</p>
+          <p class="category-desc-short">Mirrors, framed prints, and hand-carved panels for walls that deserve something already earned.</p>
         </div>
       </div>
 
@@ -89,7 +119,8 @@
         </div>
         <div class="category-info">
           <h3>Furniture</h3>
-          <p>These are not replicas. A writing desk with a drawer that sticks just slightly. A daybed in faded velvet that sags in the one right place. Our furniture pieces are built from eras when durability was a form of respect — for the maker, the material, and everyone who would sit in it after.</p>
+          <p class="category-desc-full">These are not replicas. A writing desk with a drawer that sticks just slightly. A daybed in faded velvet that sags in the one right place. Our furniture pieces are built from eras when durability was a form of respect — for the maker, the material, and everyone who would sit in it after.</p>
+          <p class="category-desc-short">Writing desks, daybeds, and furniture built from eras when durability meant respect.</p>
         </div>
       </div>
 
@@ -119,51 +150,139 @@
     </div>
 
     <div class="shop-grid">
-      <div class="shop-card">
-        <div class="shop-img-slot"></div>
-        <div class="shop-info">
-          <span class="shop-item-name">—</span>
-          <span class="shop-item-price">—</span>
+
+      <div class="shop-card" data-name="Hand-Painted Botanical Floor Lamp" data-price="21000">
+        <div class="shop-img-slot">
+          <img class="shop-img" src="https://i.pinimg.com/1200x/96/1a/82/961a82ad475f160f39ca2fe1aaed75dd.jpg" alt="Hand-Painted Botanical Floor Lamp">
+          <span class="shop-badge">One of One</span>
         </div>
-      </div>
-      <div class="shop-card">
-        <div class="shop-img-slot"></div>
         <div class="shop-info">
-          <span class="shop-item-name">—</span>
-          <span class="shop-item-price">—</span>
+          <div class="shop-info-text">
+            <span class="shop-item-name">Hand-Painted Botanical Floor Lamp</span>
+            <p class="shop-item-desc">A tall, tapered lamp with a plaster-textured base, hand-painted in fading birds and foliage across moss, rust, and gold. The pleated shade continues the same worn botanical scene.</p>
+          </div>
+          <span class="shop-item-price">₹21,000</span>
         </div>
+        <button class="shop-cta" type="button">
+          <span class="shop-cta-label">Add to Cart</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </button>
       </div>
-      <div class="shop-card">
-        <div class="shop-img-slot"></div>
+
+      <div class="shop-card" data-name="Melting Wall Clock" data-price="14500">
+        <div class="shop-img-slot">
+          <img class="shop-img" src="https://i.pinimg.com/1200x/c8/2d/1e/c82d1e3732142f6847f63b2ce52e6981.jpg" alt="Melting Wall Clock">
+          <span class="shop-badge">One of One</span>
+        </div>
         <div class="shop-info">
-          <span class="shop-item-name">—</span>
-          <span class="shop-item-price">—</span>
+          <div class="shop-info-text">
+            <span class="shop-item-name">Melting Wall Clock</span>
+            <p class="shop-item-desc">A surrealist black-lacquered clock, its case slumped and dripping like wax under heat, with weathered antique numerals set behind curved glass. Time, warped mid-melt.</p>
+          </div>
+          <span class="shop-item-price">₹14,500</span>
         </div>
+        <button class="shop-cta" type="button">
+          <span class="shop-cta-label">Add to Cart</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </button>
       </div>
-      <div class="shop-card">
-        <div class="shop-img-slot"></div>
+
+      <div class="shop-card" data-name="Sculpted Wave Wine Holder" data-price="11800">
+        <div class="shop-img-slot">
+          <img class="shop-img" src="https://i.pinimg.com/736x/b0/88/4b/b0884bc1a7d069a2a10b7e2229dc24ab.jpg" alt="Sculpted Wave Wine Holder">
+          <span class="shop-badge">In Stock</span>
+        </div>
         <div class="shop-info">
-          <span class="shop-item-name">—</span>
-          <span class="shop-item-price">—</span>
+          <div class="shop-info-text">
+            <span class="shop-item-name">Sculpted Wave Wine Holder</span>
+            <p class="shop-item-desc">Carved from a single block of solid wood into a continuous, rippling curve, this stand cradles two bottles at once — as much sculpture as it is tableware.</p>
+          </div>
+          <span class="shop-item-price">₹11,800</span>
         </div>
+        <button class="shop-cta" type="button">
+          <span class="shop-cta-label">Add to Cart</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </button>
       </div>
-      <div class="shop-card">
-        <div class="shop-img-slot"></div>
+
+      <div class="shop-card" data-name="Illusion Draped Side Table" data-price="27500">
+        <div class="shop-img-slot">
+          <img class="shop-img" src="https://i.pinimg.com/1200x/47/8c/d7/478cd7eb188c90e63e814919078aea53.jpg" alt="Illusion Draped Side Table">
+          <span class="shop-badge">One of One</span>
+        </div>
         <div class="shop-info">
-          <span class="shop-item-name">—</span>
-          <span class="shop-item-price">—</span>
+          <div class="shop-info-text">
+            <span class="shop-item-name">Illusion Draped Side Table</span>
+            <p class="shop-item-desc">Cast in clear acrylic to mimic a tablecloth frozen mid-fall, its folds and creases caught forever in motion. Looks weightless; holds its ground.</p>
+          </div>
+          <span class="shop-item-price">₹27,500</span>
         </div>
+        <button class="shop-cta" type="button">
+          <span class="shop-cta-label">Add to Cart</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </button>
       </div>
-      <div class="shop-card">
-        <div class="shop-img-slot"></div>
+
+      <div class="shop-card" data-name="Velvet Petal Lounge Chair" data-price="38500">
+        <div class="shop-img-slot">
+          <img class="shop-img" src="https://i.pinimg.com/736x/3d/4d/ae/3d4dae2db2714e91f1d201e10b97eb67.jpg" alt="Velvet Petal Lounge Chair">
+          <span class="shop-badge">One of One</span>
+        </div>
         <div class="shop-info">
-          <span class="shop-item-name">—</span>
-          <span class="shop-item-price">—</span>
+          <div class="shop-info-text">
+            <span class="shop-item-name">Velvet Petal Lounge Chair</span>
+            <p class="shop-item-desc">Upholstered in rust-red velvet and sculpted into the unfurled shape of a single bloom, this chair sits on a sculptural pedestal base. Impossible to walk past without touching.</p>
+          </div>
+          <span class="shop-item-price">₹38,500</span>
         </div>
+        <button class="shop-cta" type="button">
+          <span class="shop-cta-label">Add to Cart</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </button>
       </div>
+
+      <div class="shop-card" data-name="Vinyl Record Wall Art" data-price="7400">
+        <div class="shop-img-slot">
+          <img class="shop-img" src="images/vinyl-record-art.jpg" alt="Vinyl Record Wall Art">
+          <span class="shop-badge">In Stock</span>
+        </div>
+        <div class="shop-info">
+          <div class="shop-info-text">
+            <span class="shop-item-name">Vinyl Record Wall Art</span>
+            <p class="shop-item-desc">A framed oil painting of stacked vinyl records in warm sepia and black, each label rendered in loose, tactile brushstrokes. For the room that still believes in album covers.</p>
+          </div>
+          <span class="shop-item-price">₹7,400</span>
+        </div>
+        <button class="shop-cta" type="button">
+          <span class="shop-cta-label">Add to Cart</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </button>
+      </div>
+
     </div>
 
   </section>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-drawer-head">
+      <span class="cart-drawer-title">Your Cart</span>
+      <button class="cart-close" id="cartClose" aria-label="Close cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="cart-empty">Your cart is empty. Every piece here is one of a kind — once it's gone, it's gone.</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+      <a class="cart-checkout" id="cartCheckout" href="https://wa.me/9372909869" target="_blank">Checkout via WhatsApp</a>
+    </div>
+  </aside>
   <!-- Testimonials Section -->
   <section id="testimonials" class="page-section testimonials-section">
 
